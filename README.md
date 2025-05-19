@@ -1,11 +1,12 @@
-# BHS infrastructure
+# Belton Historical Society infrastructure
+
+Shared infrastructure for all Belton Historical Society services.
 
 ## Provision
 
 ```sh
 az login
 
-cd infrastructure
 ./LoadDotEnv.ps1
 
 cd environments/shared
