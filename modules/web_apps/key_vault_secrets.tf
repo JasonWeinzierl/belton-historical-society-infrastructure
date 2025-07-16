@@ -25,10 +25,3 @@ resource "azurerm_key_vault_secret" "bhs_db_connstr" {
   name  = "connection-strings-bhs-mongo"
   value = replace(var.mongo_connection_string, "/?", "/${var.mongo_database_name}?")
 }
-
-resource "azurerm_key_vault_secret" "auth0_management_client_secret" {
-  key_vault_id = var.key_vault_id
-
-  name  = "auth0-management-client-secret"
-  value = var.api_auth_client_secret
-}

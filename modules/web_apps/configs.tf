@@ -75,29 +75,3 @@ resource "azurerm_app_configuration_key" "auth0_domain" {
   key   = "AUTH0_DOMAIN"
   value = var.auth_domain
 }
-
-resource "azurerm_app_configuration_key" "auth0_management_domain" {
-  configuration_store_id = var.app_config_id
-
-  label = var.environment
-  key   = "Auth0ManagementApiOptions:Domain"
-  value = var.auth_domain
-}
-
-resource "azurerm_app_configuration_key" "auth0_management_client_id" {
-  configuration_store_id = var.app_config_id
-
-  label = var.environment
-  key   = "Auth0ManagementApiOptions:ClientId"
-  value = var.api_auth_client_id
-}
-
-resource "azurerm_app_configuration_key" "auth0_management_client_secret" {
-  configuration_store_id = var.app_config_id
-
-  label = var.environment
-  key   = "Auth0ManagementApiOptions:ClientSecret"
-
-  type                = "vault"
-  vault_key_reference = azurerm_key_vault_secret.auth0_management_client_secret.versionless_id
-}

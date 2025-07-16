@@ -50,50 +50,6 @@ resource "auth0_client_credentials" "bhs_spa" {
   authentication_method = "none"
 }
 
-resource "auth0_client" "bhs_api" {
-  name        = "BHS .NET Client"
-  description = ""
-  app_type    = "non_interactive"
-
-  is_first_party       = true
-  oidc_conformant      = true
-  custom_login_page_on = true
-  cross_origin_auth    = true
-
-  jwt_configuration {
-    alg                 = "RS256"
-    lifetime_in_seconds = 36000
-    secret_encoded      = false
-  }
-
-  refresh_token {
-    expiration_type              = "non-expiring"
-    rotation_type                = "non-rotating"
-    leeway                       = 0
-    infinite_token_lifetime      = true
-    infinite_idle_token_lifetime = true
-  }
-
-  grant_types = [
-    "client_credentials",
-  ]
-}
-
-resource "auth0_client_credentials" "bhs_api" {
-  client_id = auth0_client.bhs_api.id
-
-  authentication_method = "client_secret_post"
-}
-
-resource "auth0_client_grant" "bhs_api_auth0_management" {
-  client_id = auth0_client.bhs_api.id
-  audience  = data.auth0_tenant.bhs.management_api_identifier
-
-  scopes = [
-    "read:users",
-  ]
-}
-
 resource "auth0_resource_server" "bhs_api" {
   name        = "BHS .NET API"
   identifier  = "https://beltonhistoricalsociety.org/api/swagger/index.html"

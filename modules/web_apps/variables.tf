@@ -76,15 +76,3 @@ variable "spa_auth_client_id" {
   description = "The authentication client ID for the SPA."
   type        = string
 }
-
-variable "api_auth_client_id" {
-  description = "The authentication client ID for the API."
-  type        = string
-}
-
-variable "api_auth_client_secret" {
-  description = "The authentication client secret for the API."
-  type        = string
-  sensitive   = true
-}
-
