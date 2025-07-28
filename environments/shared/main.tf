@@ -6,6 +6,11 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~>4.26.0"
     }
+
+    digitalocean = {
+      source  = "digitalocean/digitalocean"
+      version = "~>2.61.0"
+    }
   }
 
   backend "azurerm" {
@@ -19,6 +24,8 @@ terraform {
 provider "azurerm" {
   features {}
 }
+
+provider "digitalocean" {}
 
 data "azurerm_client_config" "current" {}
 
@@ -40,4 +47,11 @@ resource "azurerm_role_assignment" "bhs_appcs_dataowner" {
   scope                = azurerm_app_configuration.bhs.id
   role_definition_name = "App Configuration Data Owner"
   principal_id         = data.azurerm_client_config.current.object_id
+}
+
+
+resource "digitalocean_container_registry" "bhs" {
+  name                   = "beltonhistoricalsociety"
+  subscription_tier_slug = "starter"
+  region                 = "nyc3"
 }

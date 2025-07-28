@@ -38,6 +38,7 @@ Populate environment variables:
 * NAMECHEAP_USER_NAME
 * NAMECHEAP_API_USER
 * NAMECHEAP_API_KEY
+* DIGITALOCEAN_TOKEN
 
 The `LoadDotEnv.ps1` script in this directory can help load these values from a `.env` file with Powershell.
 
@@ -71,6 +72,12 @@ Namecheap API Access must be enabled.
 #### DNS propagation
 
 Creating the hostname bindings may fail until DNS updates have propagated.
+
+#### DigitalOcean
+
+1. Create a DigitalOcean account.
+2. Create an API token with full access.
+3. Set DIGITALOCEAN_TOKEN.
 
 ## Standards
 

@@ -31,6 +31,11 @@ terraform {
       source  = "namecheap/namecheap"
       version = "~>2.2.0"
     }
+
+    digitalocean = {
+      source  = "digitalocean/digitalocean"
+      version = "~>2.61.0"
+    }
   }
 
   backend "azurerm" {
@@ -54,6 +59,8 @@ provider "azuread" {}
 provider "sendgrid" {}
 
 provider "namecheap" {}
+
+provider "digitalocean" {}
 
 data "github_repository" "bhs" {
   full_name = "JasonWeinzierl/BHS.NET"
@@ -189,6 +196,12 @@ module "bhs_hostname_subdomain" {
   depends_on = [
     namecheap_domain_records.subdomain_beltonhistoricalsociety_org, # NOTE: This may still fail to create until the records have propagated.
   ]
+}
+
+module "rails_app" {
+  source = "../../modules/rails_app"
+
+  environment = "production"
 }
 
 module "me" {
