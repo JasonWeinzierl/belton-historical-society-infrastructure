@@ -22,41 +22,12 @@ resource "azurerm_linux_web_app" "bhs_web" {
     type = "SystemAssigned"
   }
 
-  sticky_settings {
-    app_setting_names = [
-      "APPINSIGHTS_INSTRUMENTATIONKEY",
-      "APPINSIGHTS_PROFILERFEATURE_VERSION",
-      "APPINSIGHTS_SNAPSHOTFEATURE_VERSION",
-      "APPLICATIONINSIGHTS_CONNECTION_STRING",
-      "ApplicationInsightsAgent_EXTENSION_VERSION",
-      "DiagnosticServices_EXTENSION_VERSION",
-      "InstrumentationEngine_EXTENSION_VERSION",
-      "SnapshotDebugger_EXTENSION_VERSION",
-      "XDT_MicrosoftApplicationInsights_BaseExtensions",
-      "XDT_MicrosoftApplicationInsights_Mode",
-      "XDT_MicrosoftApplicationInsights_PreemptSdk",
-      "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT",
-      "XDT_MicrosoftApplicationInsightsJava",
-      "XDT_MicrosoftApplicationInsights_NodeJS",
-    ]
-  }
-
   app_settings = {
-    ASPNETCORE_ENVIRONMENT = title(var.environment),
+    DOTNET_ENVIRONMENT = title(var.environment),
 
-    // TODO: figure out if this is all necessary?
-    // see https://github.com/Azure/appservice-landing-zone-accelerator/blob/main/scenarios/secure-baseline-multitenant/terraform/modules/spoke/app-service/main.tf
-    APPINSIGHTS_INSTRUMENTATIONKEY                  = var.insights_key
-    APPINSIGHTS_PROFILERFEATURE_VERSION             = "1.0.0"
-    APPINSIGHTS_SNAPSHOTFEATURE_VERSION             = "1.0.0"
-    APPLICATIONINSIGHTS_CONNECTION_STRING           = var.insights_conn_str
-    ApplicationInsightsAgent_EXTENSION_VERSION      = "~2"
-    DiagnosticServices_EXTENSION_VERSION            = "~3"
-    InstrumentationEngine_EXTENSION_VERSION         = "disabled" // example has ~1
-    SnapshotDebugger_EXTENSION_VERSION              = "disabled" // example has ~1
-    XDT_MicrosoftApplicationInsights_BaseExtensions = "disabled" // example has ~1
-    XDT_MicrosoftApplicationInsights_Mode           = "recommended"
-    XDT_MicrosoftApplicationInsights_PreemptSdk     = "disabled"
+    APPINSIGHTS_INSTRUMENTATIONKEY             = var.insights_key
+    APPLICATIONINSIGHTS_CONNECTION_STRING      = var.insights_conn_str
+    ApplicationInsightsAgent_EXTENSION_VERSION = "~3" # https://learn.microsoft.com/en-us/azure/azure-monitor/app/codeless-app-service?tabs=aspnetcore#application-settings-definitions
   }
 
   connection_string {
