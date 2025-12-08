@@ -4,12 +4,12 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~>4.26.0"
+      version = "~>4.55.0"
     }
 
     digitalocean = {
       source  = "digitalocean/digitalocean"
-      version = "~>2.61.0"
+      version = "~>2.71.0"
     }
   }
 
