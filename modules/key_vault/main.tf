@@ -17,6 +17,6 @@ resource "azurerm_key_vault" "bhs" {
   location            = var.location
   tenant_id           = data.azurerm_client_config.current.tenant_id
 
-  enable_rbac_authorization = true
-  sku_name                  = "standard"
+  rbac_authorization_enabled = true
+  sku_name                   = "standard"
 }
