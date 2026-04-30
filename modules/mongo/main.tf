@@ -16,7 +16,7 @@ resource "azurerm_cosmosdb_account" "bhs_db" {
 
   offer_type           = "Standard"
   kind                 = "MongoDB"
-  mongo_server_version = "4.2"
+  mongo_server_version = "7.0"
   free_tier_enabled    = var.enable_free_cosmos
 
   ip_range_filter = [
