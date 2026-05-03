@@ -198,12 +198,6 @@ module "bhs_hostname_subdomain" {
   ]
 }
 
-module "rails_app" {
-  source = "../../modules/rails_app"
-
-  environment = "production"
-}
-
 module "me" {
   source = "../../modules/me"
 
