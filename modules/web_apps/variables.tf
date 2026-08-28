@@ -25,6 +25,11 @@ variable "insights_key" {
   sensitive   = true
 }
 
+variable "insights_proxy_url" {
+  description = "The proxied Application Insights endpoint for browser clients."
+  type        = string
+}
+
 variable "app_service_name" {
   description = "The globally unique name for the web app."
   type        = string

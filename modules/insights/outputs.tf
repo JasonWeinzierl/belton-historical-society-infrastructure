@@ -9,3 +9,8 @@ output "web_insights_key" {
   value       = azurerm_application_insights.bhs.instrumentation_key
   sensitive   = true
 }
+
+output "client_ingestion_endpoint" {
+  description = "The proxied Application Insights endpoint for browser clients."
+  value       = "${trimsuffix(azurerm_api_management.bhs.gateway_url, "/")}/v2/track"
+}

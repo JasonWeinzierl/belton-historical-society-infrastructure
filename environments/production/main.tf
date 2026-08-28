@@ -132,6 +132,11 @@ module "insights" {
   environment         = "production"
   resource_group_name = azurerm_resource_group.bhs.name
   location            = azurerm_resource_group.bhs.location
+  publisher_email     = "admin@beltonhistoricalsociety.org"
+  client_origins = [
+    "https://beltonhistoricalsociety.org",
+    "https://www.beltonhistoricalsociety.org",
+  ]
 }
 
 module "web_apps" {
@@ -142,6 +147,7 @@ module "web_apps" {
   resource_group_name       = azurerm_resource_group.bhs.name
   insights_conn_str         = module.insights.web_insights_conn_str
   insights_key              = module.insights.web_insights_key
+  insights_proxy_url        = module.insights.client_ingestion_endpoint
   app_service_name          = "beltonhistorical"
   app_config_id             = data.azurerm_app_configuration.bhs.id
   app_config_conn_str       = data.azurerm_app_configuration.bhs.primary_read_key[0].connection_string
@@ -202,4 +208,9 @@ module "me" {
   source = "../../modules/me"
 
   key_vault_id = module.key_vault.key_vault_id
+}
+
+output "client_insights_endpoint" {
+  description = "The proxied Application Insights endpoint for the browser client."
+  value       = module.insights.client_ingestion_endpoint
 }

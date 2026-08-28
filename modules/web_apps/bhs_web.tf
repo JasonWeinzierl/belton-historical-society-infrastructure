@@ -27,6 +27,7 @@ resource "azurerm_linux_web_app" "bhs_web" {
 
     APPINSIGHTS_INSTRUMENTATIONKEY        = var.insights_key
     APPLICATIONINSIGHTS_CONNECTION_STRING = var.insights_conn_str
+    APPLICATIONINSIGHTS_PROXY_URL         = var.insights_proxy_url
     # https://learn.microsoft.com/azure/app-service/monitor-app-service?tabs=aspnetcore#deploy-at-scale
     ApplicationInsightsAgent_EXTENSION_VERSION  = "~3"          # 3 on Linux
     XDT_MicrosoftApplicationInsights_Mode       = "recommended" # "recommended" collects requests, dependencies, and exceptions.
