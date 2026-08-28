@@ -23,7 +23,8 @@ resource "azurerm_linux_web_app" "bhs_web" {
   }
 
   app_settings = {
-    DOTNET_ENVIRONMENT = title(var.environment),
+    DOTNET_ENVIRONMENT       = title(var.environment),
+    WEBSITE_RUN_FROM_PACKAGE = "1"
 
     APPINSIGHTS_INSTRUMENTATIONKEY        = var.insights_key
     APPLICATIONINSIGHTS_CONNECTION_STRING = var.insights_conn_str
