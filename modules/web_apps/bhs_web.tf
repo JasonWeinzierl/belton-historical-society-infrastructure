@@ -25,9 +25,12 @@ resource "azurerm_linux_web_app" "bhs_web" {
   app_settings = {
     DOTNET_ENVIRONMENT = title(var.environment),
 
-    APPINSIGHTS_INSTRUMENTATIONKEY             = var.insights_key
-    APPLICATIONINSIGHTS_CONNECTION_STRING      = var.insights_conn_str
-    ApplicationInsightsAgent_EXTENSION_VERSION = "~3" # https://learn.microsoft.com/en-us/azure/azure-monitor/app/codeless-app-service?tabs=aspnetcore#application-settings-definitions
+    APPINSIGHTS_INSTRUMENTATIONKEY        = var.insights_key
+    APPLICATIONINSIGHTS_CONNECTION_STRING = var.insights_conn_str
+    # https://learn.microsoft.com/azure/app-service/monitor-app-service?tabs=aspnetcore#deploy-at-scale
+    ApplicationInsightsAgent_EXTENSION_VERSION  = "~3"          # 3 on Linux
+    XDT_MicrosoftApplicationInsights_Mode       = "recommended" # "recommended" collects requests, dependencies, and exceptions.
+    XDT_MicrosoftApplicationInsights_PreemptSdk = "1"           # autoinstrumentation
   }
 
   connection_string {
