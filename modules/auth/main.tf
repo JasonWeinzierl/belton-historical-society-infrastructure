@@ -77,6 +77,11 @@ resource "auth0_resource_server_scopes" "bhs_api_scopes" {
     name        = "write:banners"
     description = "Author banner resources"
   }
+
+  scopes {
+    name        = "write:leadership"
+    description = "Author leadership resources"
+  }
 }
 
 resource "auth0_role" "owner" {
@@ -100,6 +105,11 @@ resource "auth0_role_permissions" "owner_permissions" {
   permissions {
     resource_server_identifier = auth0_resource_server.bhs_api.identifier
     name                       = "write:banners"
+  }
+
+  permissions {
+    resource_server_identifier = auth0_resource_server.bhs_api.identifier
+    name                       = "write:leadership"
   }
 
   depends_on = [
