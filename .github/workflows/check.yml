@@ -1,4 +1,4 @@
-name: Terraform Validate
+name: Check
 
 on:
   workflow_dispatch: {}
@@ -14,24 +14,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v6
-    - uses: hashicorp/setup-terraform@v3
+    - uses: actions/checkout@v7
+    - uses: opentofu/setup-opentofu@v2
       with:
-        terraform_version: "1.5.7"
+        tofu_version_file: .opentofu-version
 
-    - run: terraform fmt -check -recursive
+    - run: tofu fmt -check -recursive
 
-    - run: terraform init -backend=false
+    - run: tofu init -backend=false
       working-directory: ./environments/staging
-    - run: terraform validate
+    - run: tofu validate
       working-directory: ./environments/staging
 
-    - run: terraform init -backend=false
+    - run: tofu init -backend=false
       working-directory: ./environments/production
-    - run: terraform validate
+    - run: tofu validate
       working-directory: ./environments/production
 
-    - run: terraform init -backend=false
+    - run: tofu init -backend=false
       working-directory: ./environments/shared
-    - run: terraform validate
+    - run: tofu validate
       working-directory: ./environments/shared

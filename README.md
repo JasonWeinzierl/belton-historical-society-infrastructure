@@ -5,23 +5,25 @@ Shared infrastructure for all Belton Historical Society services.
 ## Provision
 
 ```sh
+tenv tofu install
 az login
 
 ./LoadDotEnv.ps1
+# or `set -a && source .env && set +a` in bash
 
 cd environments/shared
-terraform init
-terraform apply
+tofu init
+tofu apply
 
 cd ../staging
 ../../LoadDotEnv.ps1 staging
-terraform init
-terraform apply
+tofu init
+tofu apply
 
 cd ../production
 ../../LoadDotEnv.ps1 production
-terraform init
-terraform apply
+tofu init
+tofu apply
 ```
 
 ## Getting Started
@@ -44,7 +46,7 @@ The `LoadDotEnv.ps1` script in this directory can help load these values from a 
 
 ### Manual Steps
 
-The GitHub repo, the Azure subscription, the domain purchased through Namecheap, and several Auth0 resources are not managed in terraform.
+The GitHub repo, the Azure subscription, the domain purchased through Namecheap, and several Auth0 resources are not managed in IaC.
 
 #### Auth0 pre-provision
 
