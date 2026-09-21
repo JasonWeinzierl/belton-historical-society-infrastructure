@@ -61,3 +61,9 @@ resource "azurerm_role_assignment" "bhs_github_actions" {
   role_definition_name = "Website Contributor"
   principal_id         = var.build_server_principal_id
 }
+
+resource "azurerm_app_service_source_control" "bhs_github" {
+  app_id   = azurerm_linux_web_app.bhs_web.id
+  repo_url = var.github_repo_url
+  branch   = "main"
+}

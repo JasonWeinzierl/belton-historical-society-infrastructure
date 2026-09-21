@@ -81,3 +81,8 @@ variable "spa_auth_client_id" {
   description = "The authentication client ID for the SPA."
   type        = string
 }
+
+variable "github_repo_url" {
+  description = "The URL of the GitHub repository."
+  type        = string
+}

@@ -157,6 +157,7 @@ module "web_apps" {
   auth_domain               = module.auth.auth_domain
   api_auth_audience         = module.auth.api_auth_audience
   spa_auth_client_id        = module.auth.spa_client_id
+  github_repo_url           = data.github_repository.bhs.html_url
 }
 
 # TODO: set up the A record for the root domain.
