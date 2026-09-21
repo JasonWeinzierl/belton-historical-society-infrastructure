@@ -4,7 +4,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~>4.55.0"
+      version = "~>5.6.0"
     }
   }
 }
@@ -17,6 +17,7 @@ resource "azurerm_storage_account" "bhs" {
   account_tier                     = "Standard"
   account_replication_type         = "LRS"
   cross_tenant_replication_enabled = true
+  allow_nested_items_to_be_public  = true
 }
 
 resource "azurerm_storage_container" "bhs_photos" {
